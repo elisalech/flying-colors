@@ -6,9 +6,13 @@ body {
 
 #info div {
   position: absolute;
-  top: 30%;
-  left: 30%;
-  transform: translate(-50%, -50%);
+  top: 70px;
+  left: 50px;
+  /* transform: translate(-50%, -50%); */
+}
+
+.mobile {
+  display: none;
 }
 
 #bio {
@@ -23,6 +27,7 @@ p {
   font-size: 34px;
   color: #242424;
   margin-bottom: 20px;
+  line-height: 1.2;
 }
 
 #container {
@@ -49,7 +54,22 @@ p {
   /* border-radius: 50%; */
 }
 
-.trans {
-  top: 0;
-  left: 0;
+@media (min-width: 320px) and (max-width: 480px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  #info div {
+    top: 30px;
+    left: 20px;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 1.5;
+  }
 }

@@ -1,10 +1,15 @@
 const container = document.getElementById("container");
 const info = document.getElementById("info");
 const body = document.querySelector("body");
-const left = 1000;
+const left = 600;
 const difSize = 70;
 const outSpeed = 40;
+
 let interIds = [];
+
+const mobile = ["red", "green", "blue", null];
+let mobCleared = false;
+let moving = false;
 
 const randColor = () => {
   return Math.floor(Math.random() * 255);
@@ -41,29 +46,6 @@ const createDiv = color => {
 const generate = color => {
   while (container.firstChild) container.removeChild(container.firstChild);
   info.style.display = "none";
-  //
-  // for (let i = 1; i <= left; i++) {
-  //   setTimeout(() => {
-  //     const div = createDiv();
-  //     container.appendChild(div);
-  //
-  //     if (container.childNodes.length >= 25) {
-  //       // while (container.firstChild)
-  //       container.removeChild(container.firstChild);
-  //     }
-  //
-  //     setTimeout(() => {
-  //       div.style.top = `${randSize()}%`;
-  //       div.style.left = `${randSize()}%`;
-  //     }, 10);
-  //     // div.style.top = "0";
-  //     // div.style.left = "0";
-  //     // div.classList.add("trans");
-  //   }, 200 * i);
-  // }
-
-  // let id = setInterval(() => console.log("INTERVAL"), 100);
-  // interIds.push(id);
 
   let id = setInterval(() => {
     const div = createDiv(color);
@@ -106,7 +88,30 @@ document.addEventListener("keypress", event => {
   }
 });
 
-document.addEventListener("click", event => {
+document.addEventListener("mouseup", event => {
   const color = event.target.style.background;
   changeBody(color);
+});
+
+document.addEventListener("touchend", event => {
+  if (moving) return;
+  if (mobCleared) {
+    while (container.firstChild) container.removeChild(container.firstChild);
+    mobCleared = false;
+    return;
+  }
+  const randI = Math.floor(Math.random() * mobile.length);
+  const option = mobile[randI];
+  return generate(option);
+});
+
+document.addEventListener("touchmove", event => {
+  if (!container.firstChild) return;
+  moving = true;
+  clearAllInterval();
+
+  setTimeout(() => {
+    moving = false;
+    mobCleared = true;
+  }, 1100);
 });
