@@ -15,6 +15,10 @@ body {
   display: none;
 }
 
+.desktop {
+  display: block;
+}
+
 #bio {
   margin: 0;
   position: absolute;
@@ -54,13 +58,13 @@ p {
   /* border-radius: 50%; */
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 200px) and (max-width: 560px) {
   .desktop {
-    display: none;
+    display: none !important;
   }
 
   .mobile {
-    display: block;
+    display: block !important;
   }
 
   #info div {
